@@ -4,6 +4,7 @@ import 'package:music_player_flutter/data/constants/data_strings.dart'
     as strings;
 import 'package:music_player_flutter/ui/widgets/common.dart' as common;
 import 'package:music_player_flutter/ui/widgets/custom_player.dart';
+import 'package:music_player_flutter/utils/rules.dart' as rules;
 
 class Player extends StatelessWidget {
   final Brightness brightness;
@@ -20,20 +21,14 @@ class Player extends StatelessWidget {
         automaticallyImplyLeading: false,
         elevation: 0.0,
         backgroundColor: Colors.transparent,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios),
-          color: styles.colorIcons(brightness),
-          iconSize: 20.0,
-          onPressed: () {
-            //TODO: add forward action
-          },
-        ),
+        actions: <Widget>[_botonIcon(icon: Icons.more_vert, function: () {})],
+        leading: _botonIcon(icon: Icons.arrow_back_ios, function: () {}),
       );
 
-  Widget _botonIcon({IconData icon, double size, Function function}) {
+  Widget _botonIcon({IconData icon, double size = 20, Function function}) {
     return SizedBox(
-      width: 75.0,
-      height: 75.0,
+      width: 70.0,
+      height: 70.0,
       child: IconButton(
         icon: Icon(icon, color: styles.colorIcons(brightness), size: size),
         onPressed: function,
@@ -41,30 +36,23 @@ class Player extends StatelessWidget {
     );
   }
 
-  void _rewindAction() {
-    //TODO: add rewind action
-  }
-
-  void _playAction() {
-    //TODO: add play/pause action
-  }
-
-  void _forwardAction() {
-    //TODO: add forward action
-  }
-
   Widget _controllersPlayer() => Row(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
+          _botonIcon(icon: Icons.repeat, function: rules.repeat, size: 24.0),
           _botonIcon(
-              icon: Icons.skip_previous, size: 36.0, function: _rewindAction),
+              icon: Icons.skip_previous,
+              size: 36.0,
+              function: rules.rewindAction),
           _botonIcon(
               icon: Icons.play_circle_filled,
-              size: 60.0,
-              function: _playAction),
+              size: 54.0,
+              function: rules.playAction),
           _botonIcon(
-              icon: Icons.skip_next, size: 36.0, function: _forwardAction)
+              icon: Icons.skip_next, size: 36.0, function: rules.forwardAction),
+          _botonIcon(
+              icon: Icons.playlist_add, function: rules.addPlayList, size: 28.0)
         ],
       );
 

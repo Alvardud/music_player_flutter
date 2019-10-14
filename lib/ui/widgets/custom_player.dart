@@ -3,7 +3,7 @@ import 'package:music_player_flutter/data/constants/styles.dart' as styles;
 import 'dart:math' as math;
 
 class CustomPlayer extends StatelessWidget {
-  Widget _portadaDisco({String portada = null}) {
+  Widget _portadaDisco({String portada}) {
     return Container(
       height: 180.0,
       width: 180.0,
